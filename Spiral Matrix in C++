@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+  using namespace std;
+  
+  int main()
+  {
+    //write your code here
+    int T, N, M;
+    cin>>T;
+    
+    while(T--){
+      cin>>N>>M;
+      int arr[N][M];
+      
+      for(int i = 0; i<N; i++){
+        for(int j = 0; j<M; j++){
+          cin>>arr[i][j];
+        }
+      }
+      
+      int minr=0, minc = 0, maxr = N-1, maxc = M-1;
+      int total = N*M, count = 1;
+      // FIRST left -> right
+      while(count<=total){
+        for(int i = minr, j = minc; j<=maxc && count<=total; j++){
+          cout<<arr[i][j]<<" ";
+          count++;
+        }
+        minr++;
+        
+        // SECOND top to bottom
+        for(int i = maxc, j = minr; j<=maxr  && count<=total; j++){
+          cout<<arr[j][i]<<" ";
+          count++;
+        }
+        maxc--;
+        
+        // THIRD right -> left
+        
+        for(int i = maxr, j = maxc; j>=minc && count<=total; j--){
+          cout<<arr[i][j]<<" ";
+          count++;
+        }
+        maxr--;
+        
+        // FOURTH bottom -> top
+        
+        for(int i = minc, j = maxr; j>=minr && count<=total; j--){
+          cout<<arr[j][i]<<" ";
+          count++;
+        }
+        minc++;
+        
+      }
+      cout<<endl;
+    }
+    
+    return 0;
+  }
+/*
+Input
+2
+3 3
+1 2 3
+4 5 6
+7 8 9
+3 4
+4 5 6 7
+1 2 3 4
+9 8 2 11
+
+Output
+1 2 3 6 9 8 7 4 5
+4 5 6 7 4 11 2 8 9 1 2 3
+*/
